@@ -1,0 +1,10 @@
+# Requirements for the ANPR pipeline
+fast-alpr
+fast-plate-ocr
+onnxruntime-gpu
+supervision
+opencv-python
+paddleocr
+easyocr
+numpy
+tqdm
