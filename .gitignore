@@ -1,0 +1,10 @@
+__pycache__/
+.venv/
+node_modules/
+.next/
+*.onnx
+.env*
+
+# Daksha commits these — do not ignore.
+# data/crops/
+# data/clips/

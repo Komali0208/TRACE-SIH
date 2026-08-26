@@ -1,0 +1,35 @@
+name: keepwarm
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: GET /health
+        env:
+          HF_SPACE_URL: ${{ vars.HF_SPACE_URL }}
+        run: |
+          if [ -z "$HF_SPACE_URL" ]; then
+            echo "FAIL: repository variable HF_SPACE_URL is not set"
+            exit 1
+          fi
+          url="${HF_SPACE_URL%/}/health"
+          echo "GET $url (timeout 30s)"
+          set +e
+          http_code=$(curl -sS -o /tmp/keepwarm-body -w "%{http_code}" --max-time 30 "$url")
+          curl_exit=$?
+          set -e
+          echo "curl exit=$curl_exit HTTP $http_code"
+          echo "----- body -----"
+          cat /tmp/keepwarm-body || true
+          echo
+          echo "----------------"
+          if [ "$curl_exit" -ne 0 ] || [ "$http_code" != "200" ]; then
+            echo "FAIL: expected HTTP 200 from /health, got $http_code (curl exit $curl_exit)"
+            exit 1
+          fi
+          echo "ok: Space is warm"
