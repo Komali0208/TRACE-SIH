@@ -1,0 +1,383 @@
+{
+  "summary": {
+    "total_sightings": 182,
+    "unique_plates": 94,
+    "mean_confidence": 0.792,
+    "open_alerts": 5,
+    "open_review_cases": 15,
+    "time_range": {
+      "from": "2026-08-25T08:00:00Z",
+      "to": "2026-08-25T09:50:31Z"
+    }
+  },
+  "per_camera": [
+    {
+      "camera_id": "CAM01",
+      "count": 31,
+      "mean_confidence": 0.742
+    },
+    {
+      "camera_id": "CAM02",
+      "count": 22,
+      "mean_confidence": 0.784
+    },
+    {
+      "camera_id": "CAM03",
+      "count": 31,
+      "mean_confidence": 0.766
+    },
+    {
+      "camera_id": "CAM04",
+      "count": 14,
+      "mean_confidence": 0.773
+    },
+    {
+      "camera_id": "CAM05",
+      "count": 20,
+      "mean_confidence": 0.817
+    },
+    {
+      "camera_id": "CAM06",
+      "count": 16,
+      "mean_confidence": 0.793
+    },
+    {
+      "camera_id": "CAM07",
+      "count": 17,
+      "mean_confidence": 0.796
+    },
+    {
+      "camera_id": "CAM08",
+      "count": 31,
+      "mean_confidence": 0.794
+    }
+  ],
+  "hourly": [
+    {
+      "hour": "2026-08-25T08:00:00Z",
+      "count": 94
+    },
+    {
+      "hour": "2026-08-25T09:00:00Z",
+      "count": 88
+    },
+    {
+      "hour": "2026-08-25T10:00:00Z",
+      "count": 0
+    }
+  ],
+  "travel_times": [
+    {
+      "from_camera": "CAM02",
+      "to_camera": "CAM06",
+      "road_distance_m": 7000,
+      "sample_count": 12,
+      "median_seconds": 596,
+      "current_seconds": 1059,
+      "delay_ratio": 1.78,
+      "congested": true
+    },
+    {
+      "from_camera": "CAM02",
+      "to_camera": "CAM03",
+      "road_distance_m": 1900,
+      "sample_count": 27,
+      "median_seconds": 285,
+      "current_seconds": 478,
+      "delay_ratio": 1.68,
+      "congested": true
+    },
+    {
+      "from_camera": "CAM01",
+      "to_camera": "CAM07",
+      "road_distance_m": 12800,
+      "sample_count": 28,
+      "median_seconds": 1865,
+      "current_seconds": 3020,
+      "delay_ratio": 1.62,
+      "congested": true
+    },
+    {
+      "from_camera": "CAM04",
+      "to_camera": "CAM08",
+      "road_distance_m": 14200,
+      "sample_count": 26,
+      "median_seconds": 1426,
+      "current_seconds": 2316,
+      "delay_ratio": 1.62,
+      "congested": true
+    },
+    {
+      "from_camera": "CAM01",
+      "to_camera": "CAM02",
+      "road_distance_m": 1450,
+      "sample_count": 11,
+      "median_seconds": 155,
+      "current_seconds": 225,
+      "delay_ratio": 1.45,
+      "congested": true
+    },
+    {
+      "from_camera": "CAM01",
+      "to_camera": "CAM03",
+      "road_distance_m": 2100,
+      "sample_count": 10,
+      "median_seconds": 256,
+      "current_seconds": 275,
+      "delay_ratio": 1.07,
+      "congested": false
+    },
+    {
+      "from_camera": "CAM05",
+      "to_camera": "CAM08",
+      "road_distance_m": 11500,
+      "sample_count": 10,
+      "median_seconds": 1076,
+      "current_seconds": 1130,
+      "delay_ratio": 1.05,
+      "congested": false
+    },
+    {
+      "from_camera": "CAM06",
+      "to_camera": "CAM05",
+      "road_distance_m": 4100,
+      "sample_count": 8,
+      "median_seconds": 599,
+      "current_seconds": 595,
+      "delay_ratio": 0.99,
+      "congested": false
+    },
+    {
+      "from_camera": "CAM03",
+      "to_camera": "CAM04",
+      "road_distance_m": 1200,
+      "sample_count": 18,
+      "median_seconds": 149,
+      "current_seconds": 140,
+      "delay_ratio": 0.94,
+      "congested": false
+    },
+    {
+      "from_camera": "CAM01",
+      "to_camera": "CAM06",
+      "road_distance_m": 5600,
+      "sample_count": 22,
+      "median_seconds": 594,
+      "current_seconds": 516,
+      "delay_ratio": 0.87,
+      "congested": false
+    }
+  ],
+  "od_matrix": [
+    {
+      "from_camera": "CAM01",
+      "to_camera": "CAM01",
+      "count": 1
+    },
+    {
+      "from_camera": "CAM01",
+      "to_camera": "CAM02",
+      "count": 2
+    },
+    {
+      "from_camera": "CAM01",
+      "to_camera": "CAM03",
+      "count": 5
+    },
+    {
+      "from_camera": "CAM01",
+      "to_camera": "CAM04",
+      "count": 1
+    },
+    {
+      "from_camera": "CAM01",
+      "to_camera": "CAM05",
+      "count": 1
+    },
+    {
+      "from_camera": "CAM01",
+      "to_camera": "CAM07",
+      "count": 1
+    },
+    {
+      "from_camera": "CAM01",
+      "to_camera": "CAM08",
+      "count": 6
+    },
+    {
+      "from_camera": "CAM02",
+      "to_camera": "CAM01",
+      "count": 2
+    },
+    {
+      "from_camera": "CAM02",
+      "to_camera": "CAM02",
+      "count": 1
+    },
+    {
+      "from_camera": "CAM02",
+      "to_camera": "CAM03",
+      "count": 4
+    },
+    {
+      "from_camera": "CAM02",
+      "to_camera": "CAM04",
+      "count": 1
+    },
+    {
+      "from_camera": "CAM02",
+      "to_camera": "CAM05",
+      "count": 1
+    },
+    {
+      "from_camera": "CAM02",
+      "to_camera": "CAM08",
+      "count": 2
+    },
+    {
+      "from_camera": "CAM03",
+      "to_camera": "CAM01",
+      "count": 4
+    },
+    {
+      "from_camera": "CAM03",
+      "to_camera": "CAM02",
+      "count": 1
+    },
+    {
+      "from_camera": "CAM03",
+      "to_camera": "CAM04",
+      "count": 1
+    },
+    {
+      "from_camera": "CAM03",
+      "to_camera": "CAM05",
+      "count": 4
+    },
+    {
+      "from_camera": "CAM03",
+      "to_camera": "CAM06",
+      "count": 3
+    },
+    {
+      "from_camera": "CAM04",
+      "to_camera": "CAM01",
+      "count": 2
+    },
+    {
+      "from_camera": "CAM04",
+      "to_camera": "CAM05",
+      "count": 2
+    },
+    {
+      "from_camera": "CAM04",
+      "to_camera": "CAM07",
+      "count": 1
+    },
+    {
+      "from_camera": "CAM05",
+      "to_camera": "CAM01",
+      "count": 4
+    },
+    {
+      "from_camera": "CAM05",
+      "to_camera": "CAM02",
+      "count": 2
+    },
+    {
+      "from_camera": "CAM05",
+      "to_camera": "CAM07",
+      "count": 1
+    },
+    {
+      "from_camera": "CAM05",
+      "to_camera": "CAM08",
+      "count": 1
+    },
+    {
+      "from_camera": "CAM06",
+      "to_camera": "CAM01",
+      "count": 2
+    },
+    {
+      "from_camera": "CAM06",
+      "to_camera": "CAM02",
+      "count": 2
+    },
+    {
+      "from_camera": "CAM06",
+      "to_camera": "CAM03",
+      "count": 1
+    },
+    {
+      "from_camera": "CAM06",
+      "to_camera": "CAM04",
+      "count": 1
+    },
+    {
+      "from_camera": "CAM06",
+      "to_camera": "CAM07",
+      "count": 1
+    },
+    {
+      "from_camera": "CAM06",
+      "to_camera": "CAM08",
+      "count": 2
+    },
+    {
+      "from_camera": "CAM07",
+      "to_camera": "CAM01",
+      "count": 2
+    },
+    {
+      "from_camera": "CAM07",
+      "to_camera": "CAM03",
+      "count": 4
+    },
+    {
+      "from_camera": "CAM07",
+      "to_camera": "CAM04",
+      "count": 2
+    },
+    {
+      "from_camera": "CAM07",
+      "to_camera": "CAM05",
+      "count": 1
+    },
+    {
+      "from_camera": "CAM07",
+      "to_camera": "CAM08",
+      "count": 1
+    },
+    {
+      "from_camera": "CAM08",
+      "to_camera": "CAM01",
+      "count": 2
+    },
+    {
+      "from_camera": "CAM08",
+      "to_camera": "CAM03",
+      "count": 1
+    },
+    {
+      "from_camera": "CAM08",
+      "to_camera": "CAM04",
+      "count": 1
+    },
+    {
+      "from_camera": "CAM08",
+      "to_camera": "CAM05",
+      "count": 3
+    },
+    {
+      "from_camera": "CAM08",
+      "to_camera": "CAM06",
+      "count": 2
+    },
+    {
+      "from_camera": "CAM08",
+      "to_camera": "CAM07",
+      "count": 3
+    }
+  ]
+}
