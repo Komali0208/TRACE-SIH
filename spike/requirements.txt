@@ -1,0 +1,15 @@
+# spike/requirements.txt — throwaway, pin nothing, move fast
+# GPU: install onnxruntime-gpu INSTEAD of onnxruntime if you have CUDA
+# pip install onnxruntime-gpu  # uncomment and remove onnxruntime below
+
+onnxruntime
+fast-alpr
+fast-plate-ocr
+paddleocr
+paddlepaddle
+easyocr
+opencv-python
+supervision
+ultralytics
+numpy
+Levenshtein
