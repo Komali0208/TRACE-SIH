@@ -13,7 +13,7 @@ import argparse
 import json
 import re
 from collections import defaultdict
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import cv2
@@ -42,8 +42,19 @@ from .consensus import vote_consensus
 INDIAN_PLATE_RE = re.compile(r"^[A-Z]{2}[0-9]{1,2}[A-Z]{1,3}[0-9]{4}$")
 
 
-def process_camera(camera_info: dict, out_dir: Path, alpr: ALPR, sighting_counter: int):
+def process_camera(
+    camera_info: dict, out_dir: Path, alpr: ALPR, sighting_counter: int,
+    base_timestamp: datetime | None = None,
+):
     """Process a single camera segment.
+
+    Args:
+        camera_info: camera dict from cameras.json (must have "id" and "clip_url").
+        out_dir: output directory for crops/clips.
+        alpr: initialised ALPR instance.
+        sighting_counter: next available global sighting counter.
+        base_timestamp: UTC datetime to use as the start of this camera's
+            recording.  If ``None``, defaults to ``datetime.now(UTC)``.
 
     Returns:
         sightings: list of sighting dicts conforming to the data contract.
@@ -58,6 +69,10 @@ def process_camera(camera_info: dict, out_dir: Path, alpr: ALPR, sighting_counte
     # Capture FPS *before* any processing (and definitely before release)
     fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
     total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+
+    # Base timestamp for computing per-sighting ts from video offset
+    if base_timestamp is None:
+        base_timestamp = datetime.now(timezone.utc).replace(microsecond=0)
 
     tracker = sv.ByteTrack()
 
@@ -201,13 +216,12 @@ def process_camera(camera_info: dict, out_dir: Path, alpr: ALPR, sighting_counte
         first_frame = data["frames"][0] if data["frames"] else 0
         video_offset_s = round(float(first_frame) / fps, 2)
 
-        # UTC timestamp — use generated_at as base, offset by video position
-        ts_utc = (
-            datetime.now(timezone.utc)
-            .replace(microsecond=0)
-            .isoformat()
-            .replace("+00:00", "Z")
-        )
+        # UTC timestamp — base_timestamp + video position of first frame
+        ts_dt = base_timestamp + timedelta(seconds=video_offset_s)
+        ts_utc = ts_dt.isoformat().replace("+00:00", "Z")
+        # Ensure trailing Z for naive datetimes too
+        if not ts_utc.endswith("Z"):
+            ts_utc += "Z"
 
         sighting_id = f"SGT_{sighting_counter:04d}"
         sighting_counter += 1
@@ -331,7 +345,20 @@ def main():
     parser.add_argument("--out", required=True, help="Output directory for data/")
     args = parser.parse_args()
 
-    cameras = load_cameras_json(args.cameras)
+    cameras_data = load_cameras_json(args.cameras)
+
+    # cameras.json may be a plain array of cameras or an object with
+    # "cameras" and "camera_links" keys.  Handle both.
+    if isinstance(cameras_data, dict):
+        cameras = cameras_data.get("cameras", cameras_data.get("data", []))
+        camera_links = cameras_data.get("camera_links", [])
+    elif isinstance(cameras_data, list):
+        cameras = cameras_data
+        camera_links = []
+    else:
+        cameras = []
+        camera_links = []
+
     out_dir = Path(args.out)
     (out_dir / "crops").mkdir(parents=True, exist_ok=True)
     (out_dir / "clips").mkdir(parents=True, exist_ok=True)
@@ -377,7 +404,7 @@ def main():
             "footage_note": "Processed from camera video segments via offline ANPR pipeline.",
         },
         "cameras": cameras,
-        "camera_links": [],  # supplied in cameras.json or by Daksha
+        "camera_links": camera_links,
         "sightings": all_sightings,
         "watchlist": [],
         "alerts": [],

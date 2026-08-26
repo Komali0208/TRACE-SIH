@@ -6,8 +6,9 @@ images supplied for the project and writes a markdown summary with the
 plate‑level exact‑match accuracy for each engine.
 
 The required inputs are:
-- ``ground_truth.csv`` – a CSV file with two columns: ``image_path`` (relative
-  to the repo root) and ``plate_text`` (the ground‑truth plate string).
+- ``ground_truth.csv`` – a CSV file with two columns: ``filename`` or
+  ``image_path`` (relative to the CSV location) and ``plate_text`` (the
+  ground‑truth plate string, uppercase, no spaces).
 - The folder containing the cropped plate images referenced in the CSV.
 
 The script is safe to run even if one or more OCR libraries are missing – the
@@ -34,7 +35,7 @@ def load_ground_truth(csv_path: Path) -> List[Tuple[Path, str]]:
     with csv_path.open(newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
-            img_rel = row.get("image_path") or row.get("image")
+            img_rel = row.get("filename") or row.get("image_path") or row.get("image")
             plate = row.get("plate_text") or row.get("plate")
             if not img_rel or not plate:
                 continue
@@ -47,13 +48,18 @@ def load_ground_truth(csv_path: Path) -> List[Tuple[Path, str]]:
 # ---------------------------------------------------------------------------
 def get_fast_plate_ocr() -> Callable[[Path], str] | None:
     try:
-        from fast_plate_ocr import FastPlateOCR
+        from fast_plate_ocr import ONNXPlateRecognizer
     except ImportError:
         return None
-    engine = FastPlateOCR()
+    engine = ONNXPlateRecognizer("cct-s-v2-global-model")
     def recognize(img_path: Path) -> str:
         try:
-            text, _ = engine.recognize(str(img_path))
+            import cv2 as _cv2
+            img = _cv2.imread(str(img_path))
+            if img is None:
+                return ""
+            preds = engine.run(img)
+            text = preds[0] if preds else ""
         except Exception:
             text = ""
         return text.strip().upper()
