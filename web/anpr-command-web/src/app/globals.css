@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Archivo Condensed", sans-serif;
+  --font-body: "Inter", ui-sans-serif, sans-serif;
+  --font-data: "JetBrains Mono", ui-monospace, monospace;
+
+  --bg: #0b1014;
+  --surface: #131a20;
+  --surface-2: #1a232b;
+  --border: #26313b;
+  --text: #e8eef2;
+  --muted: #8494a1;
+
+  --plate-white: #f2f4f0;
+  --plate-amber: #e8b400;
+  --plate-ink: #0a0a0a;
+
+  --signal: #4cc3c8;
+  --warn: #e8942e;
+  --danger: #e0483b;
+  --ok: #4fa96b;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+body {
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(76, 195, 200, 0.35);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #34424e;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.card {
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.glass {
+  background: rgba(19, 26, 32, 0.72);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.leaflet-container {
+  background: #0b1014 !important;
+  font-family: var(--font-body);
+}
+.leaflet-control-attribution {
+  background: rgba(11, 16, 20, 0.6) !important;
+  color: var(--muted) !important;
+  font-size: 9px !important;
+}
+.leaflet-control-attribution a {
+  color: var(--signal) !important;
+}
+.leaflet-control-zoom a {
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.leg-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  pathLength: 1;
+  animation: drawLine 1.2s ease-out forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .leg-line {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+}
