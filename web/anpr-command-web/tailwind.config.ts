@@ -5,19 +5,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#0B1014",
-        surface: "#131A20",
-        surface2: "#1A232B",
-        border2: "#26313B",
-        text: "#E8EEF2",
-        muted: "#8494A1",
+        bg: "#F5F1E8",
+        surface: "#FBF8F1",
+        surface2: "#F0EBE0",
+        border2: "#D8CFB8",
+        text: "#2B2620",
+        muted: "#6B6254",
         platewhite: "#F2F4F0",
         plateamber: "#E8B400",
         plateink: "#0A0A0A",
-        signal: "#4CC3C8",
-        warn: "#E8942E",
-        danger: "#E0483B",
-        ok: "#4FA96B",
+        signal: "#7A3B2E",
+        warn: "#C4842A",
+        danger: "#A13A2E",
+        ok: "#5C7A4A",
       },
       fontFamily: {
         display: ["var(--font-display)", "sans-serif"],
@@ -25,14 +25,14 @@ const config: Config = {
         data: ["var(--font-data)", "monospace"],
       },
       boxShadow: {
-        panel: "0 1px 0 rgba(255,255,255,0.03) inset, 0 8px 24px rgba(0,0,0,0.35)",
-        chip: "0 1px 3px rgba(0,0,0,0.5)",
+        panel: "0 1px 0 rgba(255,255,255,0.4) inset, 0 8px 24px rgba(43,38,32,0.08)",
+        chip: "0 1px 3px rgba(0,0,0,0.18)",
       },
       keyframes: {
         pulseMarker: {
-          "0%": { boxShadow: "0 0 0 0 rgba(76,195,200,0.55)" },
-          "70%": { boxShadow: "0 0 0 14px rgba(76,195,200,0)" },
-          "100%": { boxShadow: "0 0 0 0 rgba(76,195,200,0)" },
+          "0%": { boxShadow: "0 0 0 0 rgba(122,59,46,0.45)" },
+          "70%": { boxShadow: "0 0 0 14px rgba(122,59,46,0)" },
+          "100%": { boxShadow: "0 0 0 0 rgba(122,59,46,0)" },
         },
         drawLine: {
           from: { strokeDashoffset: "1" },

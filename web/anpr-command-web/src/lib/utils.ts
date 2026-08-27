@@ -23,10 +23,10 @@ export function fmtTime(iso: string) {
 }
 
 export function confColor(c: number) {
-  if (c >= 0.85) return "#4FA96B";
-  if (c >= 0.6) return "#4CC3C8";
-  if (c >= 0.4) return "#E8942E";
-  return "#E0483B";
+  if (c >= 0.85) return "#5C7A4A";
+  if (c >= 0.6) return "#7A3B2E";
+  if (c >= 0.4) return "#C4842A";
+  return "#A13A2E";
 }
 
 // Character-vote consensus, mirrors the pipeline's own method: for each

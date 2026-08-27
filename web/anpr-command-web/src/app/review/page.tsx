@@ -4,6 +4,7 @@ import { useDataMode } from "@/lib/mode";
 import { useSnapshot } from "@/lib/useSnapshot";
 import { PlateChip } from "@/components/PlateChip";
 import { CropThumb } from "@/components/CropThumb";
+import { ConsensusVote } from "@/components/ConsensusVote";
 import { FlagChip, Skeleton } from "@/components/Chips";
 import { isValidPlate, voteConsensus, fmtTime } from "@/lib/utils";
 import { ReviewCase } from "@/lib/types";
@@ -63,24 +64,12 @@ function ReviewCard({
       <div className="flex gap-3">
         <CropThumb cameraLabel={c.sighting?.camera_id ?? ""} offset={c.sighting?.video_offset_s ?? 0} className="h-24 w-28 shrink-0" />
         <div className="flex-1 min-w-0">
-          <div className="eyebrow mb-1.5">{reads.length} frame reads → consensus</div>
-          <div className="flex flex-wrap gap-1 mb-2">
-            {reads.slice(0, 10).map((r, i) => (
-              <span
-                key={i}
-                className="font-data text-[10px] px-1.5 py-0.5 rounded border border-[var(--border)] bg-[var(--surface-2)] text-[var(--muted)]"
-                style={{ animation: `rise 0.3s ease-out ${i * 45}ms both` }}
-                title={`frame ${r.frame} · conf ${(r.conf * 100).toFixed(0)}%`}
-              >
-                {r.text || "∅"}
-              </span>
-            ))}
-            {reads.length === 0 && <span className="text-[11px] text-[var(--muted)]">No frame data.</span>}
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-[var(--muted)] text-lg leading-none">→</span>
-            <PlateChip plate={consensus} size="md" />
-          </div>
+          <ConsensusVote
+            reads={reads}
+            consensus={consensus}
+            frameCount={c.sighting?.frame_count}
+            method={c.sighting?.consensus_method}
+          />
         </div>
       </div>
 
@@ -101,7 +90,7 @@ function ReviewCard({
             <button
               disabled={busy}
               onClick={() => act("corrected")}
-              className="flex-1 rounded-lg bg-[var(--signal)] text-black text-xs font-semibold py-2 disabled:opacity-50"
+              className="flex-1 rounded-lg bg-[var(--signal)] text-[#FBF8F1] text-xs font-semibold py-2 disabled:opacity-50"
             >
               Save correction
             </button>

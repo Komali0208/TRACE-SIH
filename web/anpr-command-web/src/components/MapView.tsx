@@ -5,16 +5,17 @@ import { useEffect, useMemo } from "react";
 import { Camera } from "@/lib/types";
 
 function markerIcon(active: boolean, danger = false) {
-  const color = danger ? "#E0483B" : active ? "#4CC3C8" : "#8494A1";
+  const color = danger ? "#A13A2E" : active ? "#7A3B2E" : "#6B6254";
   return L.divIcon({
     className: "",
-    html: `<div style="position:relative;width:14px;height:14px;">
-      <div style="position:absolute;inset:0;border-radius:50%;background:${color};box-shadow:0 0 0 2px #0B1014, 0 0 10px ${color}99;${
-      active ? `animation:pulseMarker 2.2s ease-out infinite;` : ""
-    }"></div>
-    </div>`,
-    iconSize: [14, 14],
-    iconAnchor: [7, 7],
+    html: `<svg width="22" height="32" viewBox="0 0 22 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block">
+      <path d="M11 1C5.477 1 1 5.477 1 11c0 7.5 10 19 10 19s10-11.5 10-19C21 5.477 16.523 1 11 1z"
+        fill="${color}" stroke="#FBF8F1" stroke-width="1.5"/>
+      <circle cx="11" cy="11" r="3.2" fill="#FBF8F1"/>
+    </svg>`,
+    iconSize: [22, 32],
+    iconAnchor: [11, 32],
+    popupAnchor: [0, -28],
   });
 }
 
@@ -50,8 +51,8 @@ export function MapView({
     <div style={{ height, width: "100%" }} className="overflow-hidden rounded-xl">
       <MapContainer center={center} zoom={11} style={{ height: "100%", width: "100%" }} zoomControl={true}>
         <TileLayer
-          attribution='&copy; <a href="https://carto.com/attributions">CARTO</a>'
-          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+          attribution='&copy; OpenStreetMap contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {cameras.map((c) => (
           <Marker
@@ -72,7 +73,7 @@ export function MapView({
         ))}
         {path.length > 1 && (
           <>
-            <Polyline positions={path} pathOptions={{ color: "#4CC3C8", weight: 3, opacity: 0.9 }} />
+            <Polyline positions={path} pathOptions={{ color: "#7A3B2E", weight: 4, opacity: 0.9 }} />
             <FitBounds points={path} />
           </>
         )}

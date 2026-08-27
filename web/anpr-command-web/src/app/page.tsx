@@ -47,7 +47,7 @@ function Tour({ onDone }: { onDone: () => void }) {
           </button>
           <button
             onClick={() => (step < 2 ? setStep(step + 1) : onDone())}
-            className="rounded-lg bg-[var(--signal)] text-black text-sm font-semibold px-4 py-2 hover:brightness-110 transition"
+            className="rounded-lg bg-[var(--signal)] text-[#FBF8F1] text-sm font-semibold px-4 py-2 hover:brightness-110 transition"
           >
             {step < 2 ? "Next" : "Start exploring"}
           </button>
@@ -178,7 +178,7 @@ export default function CommandCentre() {
                   <Link
                     key={s.id}
                     href={s.plate_text ? `/trajectory?plate=${s.plate_text}` : "/review"}
-                    className="flex items-center gap-3 px-4 py-2.5 hover:bg-white/5 transition-colors"
+                    className="flex items-center gap-3 px-4 py-2.5 hover:bg-black/5 transition-colors"
                   >
                     <PlateChip plate={s.plate_text} size="sm" />
                     <div className="min-w-0 flex-1">

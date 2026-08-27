@@ -186,7 +186,7 @@ export default function AlertsPage() {
                 disabled={busy}
                 onClick={addToWatchlist}
                 title={mode !== "live" ? "Live backend unavailable — showing cached data." : undefined}
-                className="rounded-lg bg-[var(--signal)] text-black text-sm font-semibold py-2 disabled:opacity-50"
+                className="rounded-lg bg-[var(--signal)] text-[#FBF8F1] text-sm font-semibold py-2 disabled:opacity-50"
               >
                 Add plate
               </button>

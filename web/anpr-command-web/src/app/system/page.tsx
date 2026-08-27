@@ -14,7 +14,7 @@ export default function SystemPage() {
         <svg viewBox="0 0 900 300" className="w-full h-auto" role="img" aria-label="Pipeline architecture diagram">
           <defs>
             <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-              <path d="M0,0 L6,3 L0,6 Z" fill="#4CC3C8" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="#7A3B2E" />
             </marker>
           </defs>
           {[
@@ -26,21 +26,21 @@ export default function SystemPage() {
             { x: 730, y: 110, w: 155, h: 60, label: "Next.js API + UI", sub: "live query, no adapters" },
           ].map((b, i) => (
             <g key={i}>
-              <rect x={b.x} y={b.y} width={b.w} height={b.h} rx="8" fill="#1A232B" stroke="#26313B" />
-              <text x={b.x + b.w / 2} y={b.y + 26} textAnchor="middle" fill="#E8EEF2" fontSize="13" fontFamily="var(--font-display)" fontWeight={600}>
+              <rect x={b.x} y={b.y} width={b.w} height={b.h} rx="8" fill="#F0EBE0" stroke="#D8CFB8" />
+              <text x={b.x + b.w / 2} y={b.y + 26} textAnchor="middle" fill="#2B2620" fontSize="13" fontFamily="var(--font-display)" fontWeight={600}>
                 {b.label}
               </text>
-              <text x={b.x + b.w / 2} y={b.y + 44} textAnchor="middle" fill="#8494A1" fontSize="10" fontFamily="var(--font-body)">
+              <text x={b.x + b.w / 2} y={b.y + 44} textAnchor="middle" fill="#6B6254" fontSize="10" fontFamily="var(--font-body)">
                 {b.sub}
               </text>
             </g>
           ))}
-          <path d="M130,140 L165,140" stroke="#4CC3C8" strokeWidth="2" markerEnd="url(#arrow)" fill="none" />
-          <path d="M310,140 L345,140" stroke="#4CC3C8" strokeWidth="2" markerEnd="url(#arrow)" fill="none" />
-          <path d="M500,140 L525,140 L525,70 L535,70" stroke="#4CC3C8" strokeWidth="2" markerEnd="url(#arrow)" fill="none" />
-          <path d="M500,140 L525,140 L525,210 L535,210" stroke="#4CC3C8" strokeWidth="2" markerEnd="url(#arrow)" fill="none" />
-          <path d="M690,70 L710,70 L710,130 L725,130" stroke="#4CC3C8" strokeWidth="2" markerEnd="url(#arrow)" fill="none" />
-          <path d="M690,210 L710,210 L710,150 L725,150" stroke="#4CC3C8" strokeWidth="2" markerEnd="url(#arrow)" fill="none" />
+          <path d="M130,140 L165,140" stroke="#7A3B2E" strokeWidth="2" markerEnd="url(#arrow)" fill="none" />
+          <path d="M310,140 L345,140" stroke="#7A3B2E" strokeWidth="2" markerEnd="url(#arrow)" fill="none" />
+          <path d="M500,140 L525,140 L525,70 L535,70" stroke="#7A3B2E" strokeWidth="2" markerEnd="url(#arrow)" fill="none" />
+          <path d="M500,140 L525,140 L525,210 L535,210" stroke="#7A3B2E" strokeWidth="2" markerEnd="url(#arrow)" fill="none" />
+          <path d="M690,70 L710,70 L710,130 L725,130" stroke="#7A3B2E" strokeWidth="2" markerEnd="url(#arrow)" fill="none" />
+          <path d="M690,210 L710,210 L710,150 L725,150" stroke="#7A3B2E" strokeWidth="2" markerEnd="url(#arrow)" fill="none" />
         </svg>
       </section>
 

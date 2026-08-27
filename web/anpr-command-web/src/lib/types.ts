@@ -5,7 +5,7 @@ export type Camera = {
   lon: number;
   road_name: string;
   direction: string;
-  clip_url: string;
+  clip_url?: string | null;
 };
 
 export type CameraLink = {

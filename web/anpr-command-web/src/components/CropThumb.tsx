@@ -14,7 +14,7 @@ export function CropThumb({
       className={`relative overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--surface-2)] ${className}`}
       style={{
         backgroundImage:
-          "repeating-linear-gradient(115deg, rgba(76,195,200,0.05) 0px, rgba(76,195,200,0.05) 2px, transparent 2px, transparent 14px)",
+          "repeating-linear-gradient(115deg, rgba(122,59,46,0.06) 0px, rgba(122,59,46,0.06) 2px, transparent 2px, transparent 14px)",
       }}
     >
       <div className="absolute inset-0 flex items-center justify-center">

@@ -18,7 +18,7 @@ export function Sidebar() {
     <aside className="fixed left-0 top-0 z-40 flex h-full w-60 flex-col border-r border-[var(--border)] bg-[var(--surface)] select-none">
       {/* Brand Header */}
       <div className="flex h-16 items-center gap-3 px-4 border-b border-[var(--border)] bg-[var(--panel)]">
-        <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-[var(--signal)] font-mono font-bold text-xs text-black shadow-md shadow-[var(--signal)]/20">
+        <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-[var(--signal)] font-mono font-bold text-xs text-[#FBF8F1] shadow-md shadow-[var(--signal)]/20">
           TR
         </div>
         <div>
@@ -45,7 +45,7 @@ export function Sidebar() {
               className={`group flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium transition-all ${
                 active
                   ? "bg-[var(--signal)]/15 text-[var(--signal)] border border-[var(--signal)]/30 shadow-sm"
-                  : "text-[var(--muted)] hover:text-[var(--text)] hover:bg-white/5"
+                  : "text-[var(--muted)] hover:text-[var(--text)] hover:bg-black/5"
               }`}
             >
               <span
@@ -56,7 +56,7 @@ export function Sidebar() {
                 {r.icon}
               </span>
               <div className="flex flex-col">
-                <span className={`leading-tight ${active ? "font-semibold text-white" : ""}`}>
+                <span className={`leading-tight ${active ? "font-semibold text-[var(--text)]" : ""}`}>
                   {r.label}
                 </span>
                 <span className="text-[9px] text-[var(--muted)] group-hover:text-[var(--text)]/70">

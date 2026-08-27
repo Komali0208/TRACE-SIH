@@ -110,7 +110,7 @@ export default function AnalyticsPage() {
                 <YAxis stroke="var(--muted)" fontSize={11} tickLine={false} axisLine={false} width={28} />
                 <Tooltip
                   contentStyle={{ background: "var(--surface-2)", border: "1px solid var(--border)", borderRadius: 8, fontSize: 12 }}
-                  cursor={{ fill: "rgba(76,195,200,0.08)" }}
+                  cursor={{ fill: "rgba(122,59,46,0.08)" }}
                 />
                 <Bar dataKey="count" fill="var(--signal)" radius={[4, 4, 0, 0]} />
               </BarChart>
@@ -170,7 +170,7 @@ export default function AnalyticsPage() {
                         <td key={colCam.id} className="p-1 text-center">
                           <div
                             className="rounded w-6 h-6 flex items-center justify-center mx-auto"
-                            style={{ background: v ? `rgba(76,195,200,${0.12 + alpha * 0.7})` : "transparent", color: v ? "#0B1014" : "var(--muted)" }}
+                            style={{ background: v ? `rgba(122,59,46,${0.12 + alpha * 0.7})` : "transparent", color: v ? "#FBF8F1" : "var(--muted)" }}
                           >
                             {v || "·"}
                           </div>

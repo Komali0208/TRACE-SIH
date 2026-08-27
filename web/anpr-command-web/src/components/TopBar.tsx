@@ -28,8 +28,8 @@ export function TopBar() {
               href={tab.href}
               className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
                 active
-                  ? "bg-[var(--signal)] text-black font-semibold shadow-sm"
-                  : "text-[var(--muted)] hover:text-[var(--text)] hover:bg-white/5"
+                  ? "bg-[var(--signal)] text-[#FBF8F1] font-semibold shadow-sm"
+                  : "text-[var(--muted)] hover:text-[var(--text)] hover:bg-black/5"
               }`}
             >
               {tab.label}
@@ -44,7 +44,7 @@ export function TopBar() {
           8 Cameras Online
         </span>
         {mode === "checking" && (
-          <span className="text-[11px] text-[var(--muted)] flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-white/10 bg-white/5">
+          <span className="text-[11px] text-[var(--muted)] flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-black/10 bg-black/5">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--muted)] animate-pulse" />
             Connecting
           </span>
