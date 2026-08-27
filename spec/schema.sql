@@ -67,3 +67,19 @@ CREATE TABLE alerts (
 );
 
 CREATE INDEX idx_alerts_ack ON alerts(acknowledged);
+
+-- Mock VAHAN-shaped registry. Real VAHAN requires authorised government credentials.
+CREATE TABLE vehicle_registry (
+    plate_text              TEXT PRIMARY KEY,
+    owner_name              TEXT NOT NULL,
+    registration_date       TEXT NOT NULL,
+    registering_authority   TEXT NOT NULL,
+    vehicle_class           TEXT NOT NULL,
+    make_model              TEXT NOT NULL,
+    fuel_type               TEXT NOT NULL,
+    registration_status     TEXT NOT NULL,
+    fitness_valid_until     TEXT NOT NULL,
+    insurance_valid_until   TEXT NOT NULL,
+    puc_valid_until         TEXT NOT NULL,
+    is_mock_data            BOOLEAN NOT NULL DEFAULT TRUE
+);

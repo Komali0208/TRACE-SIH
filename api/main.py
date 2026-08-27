@@ -17,11 +17,13 @@ from sqlmodel import Session, func, select
 # Support running directly or as a module
 try:
     from .db import engine, get_session, init_db
-    from .models import Alert, Camera, CameraLink, ReviewCase, Sighting, Watchlist
+    from .models import Alert, Camera, CameraLink, ReviewCase, Sighting, VehicleRegistry, Watchlist
+    from .registry_seed_data import REGISTRY_SOURCE_NOTE
     from .seed import find_snapshot_file
 except ImportError:
     from db import engine, get_session, init_db
-    from models import Alert, Camera, CameraLink, ReviewCase, Sighting, Watchlist
+    from models import Alert, Camera, CameraLink, ReviewCase, Sighting, VehicleRegistry, Watchlist
+    from registry_seed_data import REGISTRY_SOURCE_NOTE
     from seed import find_snapshot_file
 
 
@@ -96,6 +98,7 @@ def _fallback_snapshot() -> dict:
             "watchlist": [],
             "alerts": [],
             "review_cases": [],
+            "registry": [],
             "analytics": {
                 "summary": {
                     "total_sightings": 0,
@@ -167,6 +170,10 @@ def get_snapshot(session: Session = Depends(get_session)):
     watchlist = session.exec(select(Watchlist)).all()
     review_cases = session.exec(select(ReviewCase)).all()
     alerts = session.exec(select(Alert)).all()
+    try:
+        registry = session.exec(select(VehicleRegistry)).all()
+    except OperationalError:
+        registry = []
 
     sighting_map = {s.id: s.model_dump() for s in sightings}
 
@@ -204,8 +211,35 @@ def get_snapshot(session: Session = Depends(get_session)):
         "watchlist": [w.model_dump() for w in watchlist],
         "alerts": alerts_out,
         "review_cases": review_cases_out,
+        "registry": [r.model_dump() for r in registry],
         "analytics": analytics,
     }
+
+
+@app.get("/registry/{plate}")
+def get_registry(plate: str, session: Session = Depends(get_session)):
+    plate_clean = plate.strip().upper()
+    try:
+        row = session.exec(
+            select(VehicleRegistry).where(VehicleRegistry.plate_text == plate_clean)
+        ).first()
+    except OperationalError:
+        row = None
+
+    if not row:
+        raise HTTPException(
+            status_code=404,
+            detail={
+                "error": {
+                    "code": "REGISTRY_NOT_FOUND",
+                    "message": f"No registry record for plate {plate_clean} in our mock dataset.",
+                }
+            },
+        )
+
+    out = row.model_dump()
+    out["source_note"] = REGISTRY_SOURCE_NOTE
+    return out
 
 
 @app.get("/cameras")

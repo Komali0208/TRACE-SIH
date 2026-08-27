@@ -175,7 +175,7 @@ function TrajectoryInner() {
                 }}
                 className="w-full flex items-center justify-between px-2.5 py-2 rounded-md hover:bg-black/5 text-left"
               >
-                <PlateChip plate={s.plate_text} size="sm" />
+                <PlateChip plate={s.plate_text} size="sm" interactive={false} />
                 <span className="text-[11px] text-[var(--muted)]">{s.sighting_count} sightings</span>
               </button>
             ))}
@@ -185,7 +185,7 @@ function TrajectoryInner() {
           <span className="eyebrow">Try</span>
           {heroPlates.map((p) => (
             <button key={p} onClick={() => runSearch(p)}>
-              <PlateChip plate={p} size="sm" className="hover:brightness-110 transition" />
+              <PlateChip plate={p} size="sm" interactive={false} className="hover:brightness-110 transition" />
             </button>
           ))}
         </div>

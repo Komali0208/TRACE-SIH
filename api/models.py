@@ -112,3 +112,22 @@ class Alert(SQLModel, table=True):
     watchlist_status: str
     ts: str
     acknowledged: bool = Field(default=False, index=True)
+
+
+class VehicleRegistry(SQLModel, table=True):
+    """Mock VAHAN-shaped vehicle registry. Always seeded as is_mock_data=True."""
+
+    __tablename__ = "vehicle_registry"
+
+    plate_text: str = Field(primary_key=True)
+    owner_name: str
+    registration_date: str
+    registering_authority: str
+    vehicle_class: str
+    make_model: str
+    fuel_type: str
+    registration_status: str
+    fitness_valid_until: str
+    insurance_valid_until: str
+    puc_valid_until: str
+    is_mock_data: bool = Field(default=True)

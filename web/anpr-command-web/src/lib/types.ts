@@ -39,6 +39,22 @@ export type WatchlistEntry = {
   added_at: string;
 };
 
+export type VehicleRegistryRecord = {
+  plate_text: string;
+  owner_name: string;
+  registration_date: string;
+  registering_authority: string;
+  vehicle_class: string;
+  make_model: string;
+  fuel_type: string;
+  registration_status: string;
+  fitness_valid_until: string;
+  insurance_valid_until: string;
+  puc_valid_until: string;
+  is_mock_data: boolean;
+  source_note?: string;
+};
+
 export type Alert = {
   id: string;
   sighting_id: string;

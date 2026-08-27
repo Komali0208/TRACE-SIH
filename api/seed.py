@@ -8,10 +8,12 @@ from sqlmodel import Session, func, select
 # Support running directly or as a module
 try:
     from .db import engine, init_db
-    from .models import Alert, Camera, CameraLink, ReviewCase, Sighting, Watchlist
+    from .models import Alert, Camera, CameraLink, ReviewCase, Sighting, VehicleRegistry, Watchlist
+    from .registry_seed_data import MOCK_REGISTRY
 except ImportError:
     from db import engine, init_db
-    from models import Alert, Camera, CameraLink, ReviewCase, Sighting, Watchlist
+    from models import Alert, Camera, CameraLink, ReviewCase, Sighting, VehicleRegistry, Watchlist
+    from registry_seed_data import MOCK_REGISTRY
 
 
 def find_snapshot_file(provided_path: Optional[str] = None) -> Path:
@@ -21,7 +23,11 @@ def find_snapshot_file(provided_path: Optional[str] = None) -> Path:
             return p
         raise FileNotFoundError(f"Snapshot file not found at provided path: {provided_path}")
 
+    api_dir = Path(__file__).resolve().parent
     candidate_paths = [
+        api_dir.parent / "web" / "anpr-command-web" / "public" / "snapshot.json",
+        Path("web/anpr-command-web/public/snapshot.json"),
+        Path("../web/anpr-command-web/public/snapshot.json"),
         Path("spec/snapshot.example.json"),
         Path("specs/fixtures/snapshot.example.json"),
         Path("spec/fixtures/snapshot.example.json"),
@@ -125,6 +131,26 @@ def seed_database(snapshot_path: Optional[str] = None) -> dict:
             )
             session.merge(alert)
 
+        # Seed mock vehicle registry (VAHAN-shaped). Prefer snapshot.registry; else embedded defaults.
+        registry_rows = data.get("registry") or MOCK_REGISTRY
+        for r in registry_rows:
+            session.merge(
+                VehicleRegistry(
+                    plate_text=r["plate_text"],
+                    owner_name=r["owner_name"],
+                    registration_date=r["registration_date"],
+                    registering_authority=r["registering_authority"],
+                    vehicle_class=r["vehicle_class"],
+                    make_model=r["make_model"],
+                    fuel_type=r["fuel_type"],
+                    registration_status=r["registration_status"],
+                    fitness_valid_until=r["fitness_valid_until"],
+                    insurance_valid_until=r["insurance_valid_until"],
+                    puc_valid_until=r["puc_valid_until"],
+                    is_mock_data=bool(r.get("is_mock_data", True)),
+                )
+            )
+
         session.commit()
 
         # Store precomputed analytics
@@ -142,6 +168,7 @@ def seed_database(snapshot_path: Optional[str] = None) -> dict:
             "watchlist": session.exec(select(func.count()).select_from(Watchlist)).one(),
             "review_cases": session.exec(select(func.count()).select_from(ReviewCase)).one(),
             "alerts": session.exec(select(func.count()).select_from(Alert)).one(),
+            "vehicle_registry": session.exec(select(func.count()).select_from(VehicleRegistry)).one(),
         }
 
         print("\nDatabase Seeding Complete. Row Counts per Table:")

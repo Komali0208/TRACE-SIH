@@ -5,12 +5,13 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   const supabase = db();
-  const [cameras, links, sightings, watchlist, meta] = await Promise.all([
+  const [cameras, links, sightings, watchlist, meta, registry] = await Promise.all([
     supabase.from("cameras").select("*").order("id"),
     supabase.from("camera_links").select("*"),
     supabase.from("sightings").select("*").order("ts"),
     supabase.from("watchlist").select("*"),
     supabase.from("app_meta").select("*").eq("id", 1).single(),
+    supabase.from("vehicle_registry").select("*"),
   ]);
   return NextResponse.json({
     schema_version: "1.0",
@@ -29,5 +30,6 @@ export async function GET() {
     camera_links: links.data,
     sightings: sightings.data,
     watchlist: watchlist.data,
+    registry: registry.data ?? [],
   });
 }

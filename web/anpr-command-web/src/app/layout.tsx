@@ -3,6 +3,7 @@ import "./globals.css";
 import "leaflet/dist/leaflet.css";
 import { Sidebar } from "@/components/Sidebar";
 import { DataModeProvider } from "@/lib/mode";
+import { RegistryProvider } from "@/lib/registry";
 import { TopBar } from "@/components/TopBar";
 
 export const metadata: Metadata = {
@@ -24,11 +25,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="font-body bg-[var(--bg)] text-[var(--text)] min-h-screen">
         <DataModeProvider>
-          <Sidebar />
-          <div className="pl-60 min-h-screen flex flex-col">
-            <TopBar />
-            <main className="flex-1">{children}</main>
-          </div>
+          <RegistryProvider>
+            <Sidebar />
+            <div className="pl-60 min-h-screen flex flex-col">
+              <TopBar />
+              <main className="flex-1">{children}</main>
+            </div>
+          </RegistryProvider>
         </DataModeProvider>
       </body>
     </html>

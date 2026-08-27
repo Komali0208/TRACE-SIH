@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Camera, CameraLink, Sighting, WatchlistEntry, Meta } from "./types";
+import { Camera, CameraLink, Sighting, WatchlistEntry, Meta, VehicleRegistryRecord } from "./types";
 
 export type SnapshotData = {
   meta: Meta;
@@ -8,6 +8,7 @@ export type SnapshotData = {
   camera_links: CameraLink[];
   sightings: Sighting[];
   watchlist: WatchlistEntry[];
+  registry?: VehicleRegistryRecord[];
 };
 
 let cached: SnapshotData | null = null;
